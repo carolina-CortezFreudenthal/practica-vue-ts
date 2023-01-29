@@ -39,15 +39,15 @@
         </v-col>
       </v-row>
     </v-container>
-  <v-footer app>
-    Footer
-  </v-footer>
+    <AppFooter />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 import useAuth from "../composables/useAuth";
+import AppFooter from "../components/AppFooter.vue
+
 
 export default defineComponent({
   name: "Authenticate",
@@ -91,5 +91,6 @@ export default defineComponent({
       }
     };
   },
+  components: { AppFooter }
 });
 </script>

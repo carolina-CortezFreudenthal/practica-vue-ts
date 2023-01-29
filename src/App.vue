@@ -18,8 +18,11 @@ import useAuth from "./composables/useAuth";
 export default defineComponent({
   name: "App",
   setup() {
+    // Verifying if we have a logged in user status
     const verifying = ref(true);
+  
     const { verify, clearUser, authToken } = useAuth();
+
     watch(authToken, () => {
       verifying.value = true;
       // when we change the authtoken, we need to verify again
@@ -30,21 +33,8 @@ export default defineComponent({
       };
       if (authToken) perform();
     }, { immediate: true })
+
     return { verifying, authToken }
   },
 });
 </script>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>

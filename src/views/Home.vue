@@ -23,7 +23,7 @@
                 </v-row>
             </v-sheet>
 
-            <v-sheet v-else="loadingProducts">
+            <v-sheet v-else>
                 <v-sheet v-if="searchView">
                     <v-btn @click="backToAll">Back to all</v-btn>
                 </v-sheet>
@@ -68,15 +68,16 @@ export default defineComponent({
         const searchView = ref(false);
         const loadingProducts = ref(true);
 
+        // Loads all the products
         const loadProducts = async () => {
             searchView.value = false;
             loadingProducts.value = true;
             try { 
                 const apiProducts = (await fakeShopApi.get<unknown, AxiosResponse<Product[]>>(
-                    "/products", { params: { offset: currPage.value - 1 , limit: 3 } }
+                    "/products", { params: { offset: (currPage.value - 1) * 3 , limit: 3 } }
                 )).data;
                 // This is a fixed value that we are not getting from the responses
-                pagesCount.value = Math.ceil(200 / 3),
+                pagesCount.value = Math.ceil(177 / 3) + 1,
                 products.value = apiProducts;
             } catch {
                 products.value = [];
@@ -84,6 +85,7 @@ export default defineComponent({
             loadingProducts.value = false;
         }
 
+        // Search by title using the search term
         const search = async () => {
             searchView.value = true;
             loadingProducts.value = true;
@@ -91,7 +93,6 @@ export default defineComponent({
                 const apiProducts = (await fakeShopApi.get<unknown, AxiosResponse<Product[]>>(
                     "/products", { params: { title: searchTerm.value } }
                 )).data;
-                pagesCount.value = 1,
                 products.value = apiProducts;
             } catch {
                 products.value = [];

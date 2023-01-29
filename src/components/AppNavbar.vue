@@ -13,8 +13,9 @@
           <router-link :to="{name: 'account'}"><v-icon>mdi-account</v-icon></router-link>
         </v-btn>
   
-        <v-menu left bottom>
+        <v-menu left bottom class="ml-2">
           <template v-slot:activator="{ props }">
+            {{  user.name }}
             <v-btn icon v-bind="props">
               <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>

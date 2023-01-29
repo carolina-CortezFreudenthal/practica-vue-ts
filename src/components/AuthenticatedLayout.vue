@@ -1,17 +1,16 @@
 <template>
-    <!-- There a rerender that happens before pushing the route.
+    <!-- There is a rerender that happens before pushing the route.
     This will prevent the component from crashing -->
     <div v-if="user" class="d-flex flex-row mb-6">  
       <AppNavbar /> 
+
       <v-main>
         <v-container fluid>
           <slot />
         </v-container>
       </v-main>
 
-      <v-footer app>
-       Footer
-      </v-footer>
+      <AppFooter />
     </div>
   </template>
   
@@ -19,6 +18,7 @@
   import { defineComponent } from "vue";
   import useAuth from "../composables/useAuth";
   import AppNavbar from "./AppNavbar.vue";
+  import AppFooter from "./AppFooter.vue";
   
   export default defineComponent({
     name: "AuthenticationLayout",
@@ -28,7 +28,7 @@
             user,
         };
     },
-    components: { AppNavbar }
+    components: { AppNavbar, AppFooter }
 });
 </script>
     

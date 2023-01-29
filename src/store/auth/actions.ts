@@ -5,6 +5,7 @@ import { ActionTree } from "vuex";
 import { IAuthState } from "./state";
 
 const actions: ActionTree<IAuthState, undefined> = {
+  // Method for login
   async login({ commit }, { email, password } ) {
     try {
       const tokenData = (await fakeShopApi.post<unknown, AxiosResponse<{ access_token: string }>>(
@@ -20,12 +21,13 @@ const actions: ActionTree<IAuthState, undefined> = {
     }
     return true;
   },
+  // Method to verify if user is logged in
   async verify({ commit }) {
     const authToken = localStorage.getItem("auth-token");
 
     if (!authToken) return false;
-
     commit("setToken", authToken);
+  
     try {
       // Fetch user data
       const profileData = (await fakeShopApi.get<unknown, AxiosResponse<User>>(
@@ -37,6 +39,7 @@ const actions: ActionTree<IAuthState, undefined> = {
     }
    return true;
   },
+  // Clear user data (used in log out)
   async clearUser({ commit }) {
     localStorage.setItem("auth-token", "");
     commit("clearUser");

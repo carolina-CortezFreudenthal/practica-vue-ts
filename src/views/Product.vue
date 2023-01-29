@@ -8,23 +8,24 @@
                 </v-flex>
             </v-layout>
         </v-sheet>
-        <v-sheet v-else>
+        <v-sheet v-else v-if="product">
             <v-btn @click="goBack">Back to all</v-btn>    
             <v-card class="mx-auto my-12" width="80%">
             <v-carousel cover height="300">
                 <v-carousel-item
-                    v-for="pimage in product?.images"
+                    v-for="pimage in product.images"
                     :key="pimage"
                     :src="pimage"
+                    :lazy-src="pimage"
                     cover
                 ></v-carousel-item>
             </v-carousel>
 
                 <v-card-item>
-                <v-card-title>{{ product?.title }}</v-card-title>
+                <v-card-title>{{ product.title }}</v-card-title>
 
                 <v-card-subtitle>
-                    <span class="me-1">{{ product?.price }} USD</span>
+                    <span class="me-1">{{ product.price }} USD</span>
                 </v-card-subtitle>
                 </v-card-item>
 
@@ -43,7 +44,7 @@
                     4.5 (413)
                     </div>
                 </v-row>
-                <v-sheet class="mt-6">{{ product?.description }}</v-sheet>
+                <v-sheet class="mt-6">{{ product.description }}</v-sheet>
                 </v-card-text>
 
                 <v-divider class="mx-4 mb-1"></v-divider>
@@ -52,7 +53,7 @@
 
                 <div class="px-4">
                 <v-chip-group>
-                    <v-chip>{{ product?.category?.name }}</v-chip>
+                    <v-chip>{{ product.category.name }}</v-chip>
                 </v-chip-group>
                 </div>
             </v-card>
@@ -69,7 +70,7 @@ import AuthenticatedLayout from "../components/AuthenticatedLayout.vue";
 import { Product } from "../models/product";
 
 export default defineComponent({
-    name: "Home",
+    name: "Product",
     props: {
         id: Number,
     },
@@ -80,7 +81,7 @@ export default defineComponent({
 
         const loadProduct = async () => {
             loading.value = true;
-            try { 
+            try {
                 const apiProduct = (await fakeShopApi.get<unknown, AxiosResponse<Product>>(
                     `/products/${props.id}`
                 )).data;
@@ -106,4 +107,3 @@ export default defineComponent({
     components: { AuthenticatedLayout }
 });
 </script>
-  
