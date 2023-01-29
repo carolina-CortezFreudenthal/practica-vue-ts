@@ -1,5 +1,8 @@
 <template>
   <v-app>
+    <video autoplay muted loop class="background">
+    <source src="./assets/Background.mp4" type="video/mp4">
+  </video>
     <div v-if="!verifying"><router-view /></div>
     <div v-else>
       <v-layout align-center justify-center column fill-height>
@@ -38,3 +41,13 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+  .background{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0.3;
+  }
+</style>

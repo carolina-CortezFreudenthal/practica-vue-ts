@@ -1,7 +1,8 @@
 <template>
     <div>
       <v-app-bar color="deep-purple accent-4" dense dark>  
-        <v-toolbar-title>Fake Store</v-toolbar-title>
+        
+        <img src="/src/assets/logo.png" class="logo" />
   
         <v-spacer></v-spacer>
   
@@ -51,4 +52,11 @@
     },
   });
   </script>
+
+<style scoped>
+  .logo {
+    height: 120%;
+    margin-left: 20px;
+  }
+</style>
     

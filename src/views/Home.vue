@@ -4,6 +4,8 @@
         <v-sheet class="d-flex flex-row mx-auto" width="70%">
             <v-sheet class="flex-grow-1 pr-4">            
                 <v-text-field
+                    class="textfield"
+                    bg-color="white"
                     label="Search"
                     v-model="searchTerm"
                     @keyup.enter.native="() => searchTerm.length >= 3 && search()"
@@ -123,4 +125,10 @@ export default defineComponent({
     components: { AuthenticatedLayout, ProductThumbnail, ProductThumbnailLoading }
 });
 </script>
+
+<style scoped>
+    .textfield {
+        opacity: 0.9;
+    }
+</style>
   

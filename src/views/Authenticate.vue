@@ -4,9 +4,11 @@
         <v-col cols="12" md="6" offset-md="3">
           <v-card  outlined tile>
             <v-card elevation="10" :loading="isLoading" class="pa-2">
-              <v-toolbar dark color="primary">
-                <v-toolbar-title>Sign In</v-toolbar-title>
+
+              <v-toolbar dark color="deep-purple" class="card-toolbar">
+                <img src="/src/assets/logo.png" class="logo"/>
               </v-toolbar>
+
               <v-card-text>
                 <v-form>
                     <v-text-field
@@ -80,17 +82,29 @@ export default defineComponent({
       doLogin: async () => {
         error.value = "";
         const valid = validate();
-        if (!valid) return;
+        if (valid) {
+          isLoading.value = true;
+          const success = await login(email.value, password.value);
+          isLoading.value = false;
 
-        isLoading.value = true;
-        const success = await login(email.value, password.value);
-        isLoading.value = false;
-
-        if (!success) error.value = "Incorrect password!";
-        else router.push({ path: '/' })
+          if (!success) error.value = "Incorrect password!";
+          else router.push({ path: '/' })
+        }
       }
     };
   },
   components: { AppFooter }
 });
 </script>
+
+<style scoped>
+  .card-toolbar {
+    height: 150px;
+  }
+
+  .logo {
+    height: 150px;
+    margin: auto;
+  }
+  
+</style>
