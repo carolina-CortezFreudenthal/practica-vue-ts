@@ -46,7 +46,7 @@
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 import useAuth from "../composables/useAuth";
-import AppFooter from "../components/AppFooter.vue
+import AppFooter from "../components/AppFooter.vue";
 
 
 export default defineComponent({
